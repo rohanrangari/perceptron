@@ -10,7 +10,9 @@
 ## How to use 
 + git clone [copy the link]
 + Go to Folder run the clone command
-+ Go inside the Repository Structure
+```bash
+  cd perceptron
+```
 + To install dependencies
 ```bash
   pip install -r requirements.txt
