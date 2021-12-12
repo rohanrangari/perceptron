@@ -19,19 +19,19 @@ def main(data, eta, epochs, filename, plot_name):
 
 
 if __name__ == "__main__":
-    AND = {
+    OR = {
         "x1": [0, 0, 1, 1],
         "x2": [0, 1, 0, 1],
-        "y": [0, 0, 0, 1],
+        "y": [0, 1, 1, 1],
     }
 
     ETA = 0.3
     EPOCHS = 10
 
     main(
-        data=AND,
+        data=OR,
         eta=ETA,
         epochs=EPOCHS,
-        filename="and.model",
-        plot_name="and.png",
+        filename="or.model",
+        plot_name="or.png",
     )
