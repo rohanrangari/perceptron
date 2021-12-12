@@ -13,10 +13,25 @@ class Perceptron:
         self.epochs = epochs
 
     def activationFunction(self, inputs, weights):
+        """Activation Definition
+
+        Args:
+            inputs : Inputs for the function
+            weights : Weights
+
+        Returns:
+            1 or 0 : If the z value is greater than 0 then 1 else 0.
+        """
         z = np.dot(inputs, weights)
         return np.where(z > 0, 1, 0)
 
     def fit(self, X, y):
+        """To train the model
+
+        Args:
+            X : Inputs for the  model
+            y : Output
+        """
         self.X = X
         self.y = y
 
@@ -43,10 +58,17 @@ class Perceptron:
             print(f"@" * 10)
 
     def predict(self, X):
+        """Prediction for the given input
+
+        Args:
+            X : Input(s)
+
+        """
         X_with_bias = np.c_[X, -np.ones(shape=(len(X), 1))]
         return self.activationFunction(X_with_bias, self.weights)
 
     def total_loss(self):
+        """Calculate the total_loss"""
         total_loss = np.sum(self.error)
         print(f"[INFO]: Total Loss : {total_loss} ")
         return total_loss

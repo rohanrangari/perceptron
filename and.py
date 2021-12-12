@@ -4,6 +4,15 @@ import pandas as pd
 
 
 def main(data, eta, epochs, filename, plot_name):
+    """And operation using perceptron
+
+    Args:
+        data : Input Data
+        eta : Learning Rate
+        epochs : Number of iterations
+        filename : Filename for the model
+        plot_name : Plotname
+    """
 
     df = pd.DataFrame(data)
     print(df)

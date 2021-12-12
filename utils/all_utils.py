@@ -10,6 +10,12 @@ plt.style.use("fivethirtyeight")
 
 
 def prepare_data(df):
+    """To prepare input data and output data from the dataframe.
+
+    Args:
+        df (pandas.dataFrame): Dataset
+
+    """
 
     X = df.drop(axis="columns", labels=["y"])
     y = df["y"]
@@ -17,6 +23,12 @@ def prepare_data(df):
 
 
 def save_model(model, filename):
+    """To save the trained model to a file.
+
+    Args:
+        model : Trained model
+        filename : Filename for the trained model.
+    """
     model_dir = "models"
     os.makedirs(model_dir, exist_ok=True)
     file_path = os.path.join(model_dir, filename)
@@ -24,6 +36,14 @@ def save_model(model, filename):
 
 
 def save_plot(df, file_name, model):
+    """To save the plot
+
+    Args:
+        df : Dataset
+        file_name : Filename to be given for the plot
+        model : Trained model
+    """
+
     def _create_base_plot(df):
         df.plot(kind="scatter", x="x1", y="x2", c="y", s=100, cmap="winter")
         plt.axhline(y=0, color="black", linestyle="--", linewidth=1)
