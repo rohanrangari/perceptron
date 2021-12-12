@@ -1,9 +1,13 @@
-"""Containing all the utility methods"""
+"""
+author: Rohan Rangari
+email: rohanrangari@gmail.com
+"""
 import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib
+import logging
 from matplotlib.colors import ListedColormap
 
 plt.style.use("fivethirtyeight")
@@ -16,9 +20,10 @@ def prepare_data(df):
         df (pandas.dataFrame): Dataset
 
     """
-
+    logging.info(f"Preparing the data for traning purpose")
     X = df.drop(axis="columns", labels=["y"])
     y = df["y"]
+    logging.info(f"Prepared the data for traning purpose")
     return X, y
 
 
@@ -29,10 +34,12 @@ def save_model(model, filename):
         model : Trained model
         filename : Filename for the trained model.
     """
+    logging.info(f"Saving the model")
     model_dir = "models"
     os.makedirs(model_dir, exist_ok=True)
     file_path = os.path.join(model_dir, filename)
     joblib.dump(model, file_path)
+    logging.info(f"Trained model saved at ['{file_path}'] ")
 
 
 def save_plot(df, file_name, model):
@@ -45,6 +52,7 @@ def save_plot(df, file_name, model):
     """
 
     def _create_base_plot(df):
+        logging.info(f"Creating plot")
         df.plot(kind="scatter", x="x1", y="x2", c="y", s=100, cmap="winter")
         plt.axhline(y=0, color="black", linestyle="--", linewidth=1)
         plt.axvline(x=0, color="black", linestyle="--", linewidth=1)
@@ -52,6 +60,7 @@ def save_plot(df, file_name, model):
         figure.set_size_inches(10, 8)
 
     def _plot_decision_boundary(X, y, classifier, resolution=0.02):
+        logging.info(f"Creating the decision boundary")
         colors = ("red", "blue", "lightgreen", "gray", "cyan")
         cmap = ListedColormap(colors[: len(np.unique(y))])
 

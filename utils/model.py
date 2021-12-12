@@ -1,4 +1,10 @@
+"""
+author: Rohan Rangari
+email: rohanrangari@gmail.com
+"""
 import numpy as np
+import logging
+from tqdm import tqdm
 
 
 class Perceptron:
@@ -8,7 +14,9 @@ class Perceptron:
         epcohs: No of Epochs
         """
         self.weights = np.random.randn(3) * 1e-4
-        print(f"[INFO]: Initial weights before training: {self.weights} ")
+        logging.info(
+            f"[INFO]: Initial weights before training: {self.weights} "
+        )
         self.eta = eta
         self.epochs = epochs
 
@@ -36,26 +44,28 @@ class Perceptron:
         self.y = y
 
         X_with_bias = np.c_[self.X, -np.ones(shape=(len(self.X), 1))]
-        print(f"[INFO]: X with bias:\n {X_with_bias} ")
+        logging.info(f"[INFO]: X with bias:\n {X_with_bias} ")
 
-        for epoch in range(self.epochs):
-            print(f"*" * 10)
-            print(f"[INFO]: for epoch: {epoch} ")
-            print(f"*" * 10)
+        for epoch in tqdm(
+            range(self.epochs), total=self.epochs, desc="training the model"
+        ):
+            logging.info(f"*" * 10)
+            logging.info(f"[INFO]: for epoch: {epoch} ")
+            logging.info(f"*" * 10)
 
             y_hat = self.activationFunction(X_with_bias, self.weights)
-            print(
+            logging.info(
                 f"[INFO]: Predicted value after forward propagation: {y_hat} "
             )
             self.error = self.y - y_hat
-            print(f"[INFO]: Error:\n {self.error} ")
+            logging.info(f"[INFO]: Error:\n {self.error} ")
             self.weights = self.weights + self.eta * np.dot(
                 X_with_bias.T, self.error
             )
-            print(
+            logging.info(
                 f"[INFO]: Updated weights after epoch: {epoch+1}/{self.epochs}: {self.weights} "
             )
-            print(f"@" * 10)
+            logging.info(f"@" * 10)
 
     def predict(self, X):
         """Prediction for the given input
@@ -70,5 +80,5 @@ class Perceptron:
     def total_loss(self):
         """Calculate the total_loss"""
         total_loss = np.sum(self.error)
-        print(f"[INFO]: Total Loss : {total_loss} ")
+        logging.info(f"[INFO]: Total Loss : {total_loss} ")
         return total_loss

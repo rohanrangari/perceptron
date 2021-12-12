@@ -1,6 +1,21 @@
+"""
+author: Rohan Rangari
+email: rohanrangari@gmail.com
+"""
 from utils.model import Perceptron
 from utils.all_utils import prepare_data, save_model, save_plot
 import pandas as pd
+import logging
+import os
+
+logging_str = "[%(asctime)s: %(levelname)s: %(module)s] %(message)s"
+logs_dir = "logs"
+os.makedirs(logs_dir, exist_ok=True)
+logging.basicConfig(
+    filename=os.path.join(logs_dir, "running_logs.log"),
+    level=logging.INFO,
+    format=logging_str,
+)
 
 
 def main(data, eta, epochs, filename, plot_name):
@@ -15,7 +30,7 @@ def main(data, eta, epochs, filename, plot_name):
     """
 
     df = pd.DataFrame(data)
-    print(df)
+    logging.info(f"This is actual dataframe: \n{df}")
 
     X, y = prepare_data(df)
 
@@ -28,6 +43,7 @@ def main(data, eta, epochs, filename, plot_name):
 
 
 if __name__ == "__main__":
+    logging.info("*" * 20)
     OR = {
         "x1": [0, 0, 1, 1],
         "x2": [0, 1, 0, 1],
@@ -37,10 +53,17 @@ if __name__ == "__main__":
     ETA = 0.3
     EPOCHS = 10
 
-    main(
-        data=OR,
-        eta=ETA,
-        epochs=EPOCHS,
-        filename="or.model",
-        plot_name="or.png",
-    )
+    try:
+        logging.info(f">>>>>> Starting training")
+        main(
+            data=OR,
+            eta=ETA,
+            epochs=EPOCHS,
+            filename="or.model",
+            plot_name="or.png",
+        )
+        logging.info(f"<<<<<<<<<< Training done successfully")
+    except Exception as e:
+        logging.exception(e)
+    finally:
+        logging.info("*" * 20)

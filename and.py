@@ -1,6 +1,11 @@
+"""
+author: Rohan Rangari
+email: rohanrangari@gmail.com
+"""
 from utils.model import Perceptron
 from utils.all_utils import prepare_data, save_model, save_plot
 import pandas as pd
+import logging
 
 
 def main(data, eta, epochs, filename, plot_name):
@@ -15,7 +20,7 @@ def main(data, eta, epochs, filename, plot_name):
     """
 
     df = pd.DataFrame(data)
-    print(df)
+    logging.info(f"This is actual dataframe: {df}")
 
     X, y = prepare_data(df)
 
@@ -28,6 +33,7 @@ def main(data, eta, epochs, filename, plot_name):
 
 
 if __name__ == "__main__":
+    logging.info("*" * 20)
     AND = {
         "x1": [0, 0, 1, 1],
         "x2": [0, 1, 0, 1],
@@ -37,10 +43,17 @@ if __name__ == "__main__":
     ETA = 0.3
     EPOCHS = 10
 
-    main(
-        data=AND,
-        eta=ETA,
-        epochs=EPOCHS,
-        filename="and.model",
-        plot_name="and.png",
-    )
+    try:
+        logging.info(f">>>>>> Starting training")
+        main(
+            data=AND,
+            eta=ETA,
+            epochs=EPOCHS,
+            filename="and.model",
+            plot_name="and.png",
+        )
+        logging.info(f"<<<<<<<<<< Training done successfully")
+    except Exception as e:
+        logging.exception(e)
+    finally:
+        logging.info("*" * 20)
