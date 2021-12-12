@@ -1,4 +1,4 @@
-# perceptron
+# Perceptron
 + Implimentation of perceptron to classify against And , OR Data
 + Modularized Coding
 + Logging
