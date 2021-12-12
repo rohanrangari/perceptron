@@ -15,5 +15,11 @@
 ```bash
   pip install -r requirements.txt
 ```
-+ Run "python or.py" for OR Model
-+ Run "python and.py" for AND Model
++ Run OR Model
+```bash
+  python or.py
+```
++ Run AND Model
+```bash
+  python and.py
+```
