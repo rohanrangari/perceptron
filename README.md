@@ -11,5 +11,6 @@
 + git clone [copy the link]
 + Go to Folder run the clone command
 + Go inside the Repository Structure
++ Run "pip install -r requirements.txt" to install dependencies
 + Run "python or.py" for OR Model
 + Run "python and.py" for AND Model
