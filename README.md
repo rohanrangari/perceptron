@@ -25,6 +25,12 @@
 ```bash
   python and.py
 ```
+
+## Plots
+
+![And Plot](https://github.com/rohanrangari/perceptron/blob/main/plots/and.png)
+
+
 ## Authors
 
 - [@rohanrangari](https://github.com/rohanrangari)
